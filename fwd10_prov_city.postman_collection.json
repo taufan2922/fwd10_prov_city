@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "98f2fbe6-929a-485d-88dd-f611ad3b79ea",
+		"name": "fwd10_prov_city",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Province",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/province",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"province"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Province ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/province/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"province",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Province",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n{\"name\": \"DKI Jakarta\"},\r\n{\"name\": \"Jawa Barat\"},\r\n{\"name\": \"Jawa Tengah\"},\r\n{\"name\": \"Jawa Timur\"},\r\n{\"name\": \"Banten\"},\r\n{\"name\": \"Sumatera Utara\"},\r\n{\"name\": \"Sumatera Barat\"},\r\n{\"name\": \"Sumatera Selatan\"},\r\n{\"name\": \"Jambi\"},\r\n{\"name\": \"Riau\"},\r\n{\"name\": \"Bengkulu\"},\r\n{\"name\": \"Aceh\"},\r\n{\"name\": \"Lampung\"},\r\n{\"name\": \"Bangka Belitung\"},\r\n{\"name\": \"Kepulauan Riau\"},\r\n{\"name\": \"Sulawesi Selatan\"},\r\n{\"name\": \"Sulawesi Tengah\"},\r\n{\"name\": \"Sulawesi Utara\"},\r\n{\"name\": \"Sulawesi Tenggara\"},\r\n{\"name\": \"Sulawesi Barat\"},\r\n{\"name\": \"Gorontalo\"},\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/province",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"province"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get City",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/city",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get City ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/city/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"city",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post City",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\"name\": \"Banda Aceh\"},\r\n    {\"name\": \"Medan\"},\r\n    {\"name\": \"Padang\"}\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/city",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"city"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
