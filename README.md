@@ -37,3 +37,13 @@ Here are the list of API endpoint:
 | `app.post(/city)` | create/add one or more city(s) |
 | `app.put(/city/:id)` | update a city's detail |
 | `app.delete(city/:id)` | delete a city |
+
+## API Simulation
+We are using Postman to simulate the API end point. You can find the Postman JSON file in this repository, called:
+`fwd10_prov_city.postman_collection.json`
+
+That's it! Feel free to [contact me](mailto:taufan2922@gmail.com?subject=[GitHub]%20fwd10_province_city) if you have any questions regarding this repo 😉
+
+![GitHub top language](https://img.shields.io/github/languages/top/{username}/{repo-name}?color=yellow)
+![GitHub forks](https://img.shields.io/github/forks/{username}/{repo-name}?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/{username}/{repo-name}?style=social)
