@@ -3,7 +3,7 @@
 
 ![poweredBy](dev.png)
 
-In this project, we are learning and creating a project about CRUD (create, read, update and delete) process.
+In this project, we are learning and creating a project about **CRUD** (create, read, update and delete) process.
 Also we are going to make API end point that is related to the CRUD process.
 
 ## Entity Relational Diagram 
