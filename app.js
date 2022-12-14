@@ -1,68 +1,145 @@
 let express = require("express");
 let app = express();
 let port = 3000;
-let models = require("./models/index");
+let { Provinces, Cities } = require("./models/index");
 
 app.use(express.json());
 
-// Provinces
+//-- Provinces
 app.get("/province", (req, res) => {
-  let findProvince = models.Provinces.findAll().then((result) => {
-    if (result.length < 1) {
-      res.json({ message: "Data not available" });
-    } else {
-      let data = [];
-      result.forEach((element) => {
-        data.push(`${element.id}: ${element.name}`);
-      });
-      res.send(data);
-    }
-  });
+  Provinces.findAll({ attributes: ["id", "provinceName"] })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.get("/province/:id", (req, res) => {
-  let findProvince = models.Provinces.findOne({ where: { id: req.params.id } }).then((result) => {
-    if (result.length < 1) {
-      res.json({ message: "Data not available" });
-    }
-    res.json(result);
-  });
+  Provinces.findOne({ where: { id: req.params.id } })
+    .then((result) => {
+      if (result) res.json(result);
+      else res.send("Data not found");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get("/province/:id/city", (req, res) => {
+  Provinces.findAll({
+    attributes: ["id", "provinceName"],
+    where: { id: req.params.id },
+    include: {
+      model: Cities,
+      attributes: ["id", "cityName"],
+    },
+  })
+    .then((result) => {
+      if (result) res.json(result);
+      else res.send("Data not found");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.post("/province", (req, res) => {
-  let createProvince = models.Provinces.bulkCreate(req.body);
-  if (!createProvince) console.error("Error create provinces");
-  res.json(req.body);
+  Provinces.bulkCreate(req.body)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
-// Cities
+app.put("/province/:id", (req, res) => {
+  Provinces.update(req.body, { where: { id: req.params.id } })
+    .then((result) => {
+      res.json(req.body);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.delete("/province/:id", (req, res) => {
+  Provinces.destroy({ where: { id: req.params.id } })
+    .then((result) => {
+      if (result) res.send("City ID: " + req.params.id + " is deleted");
+      else res.send("Data not found");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+//-- Cities
 app.get("/city", (req, res) => {
-  let findCity = models.Cities.findAll().then((result) => {
-    if (result.length < 1) {
-      res.json({ message: "Data not available" });
-    } else {
-      let data = [];
-      result.forEach((element) => {
-        data.push(`${element.id}: ${element.name}`);
-      });
-      res.send(data);
-    }
-  });
+  Cities.findAll({
+    attributes: ["id", "cityName"],
+    include: {
+      model: Provinces,
+      attributes: ["id", "provinceName"],
+    },
+  })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.get("/city/:id", (req, res) => {
-  let findCity = models.Cities.findOne({ where: { id: req.params.id } }).then((result) => {
-    if (result.length < 1) {
-      res.json({ message: "Data not available" });
-    }
-    res.json(result);
-  });
+  Cities.findOne({
+    attributes: ["id", "cityName"],
+    where: { id: req.params.id },
+    include: {
+      model: Provinces,
+      attributes: ["id", "provinceName"],
+    },
+  })
+    .then((result) => {
+      if (result) res.json(result);
+      else res.send("Data not found");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.post("/city", (req, res) => {
-  let createCity = models.Cities.bulkCreate(req.body);
-  if (!createCity) console.error("Error create cities");
-  res.json(req.body);
+  Cities.bulkCreate(req.body)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.put("/city/:id", (req, res) => {
+  Cities.update(req.body, { where: { id: req.params.id } })
+    .then((result) => {
+      res.json(req.body);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.delete("/city/:id", (req, res) => {
+  Cities.destroy({ where: { id: req.params.id } })
+    .then((result) => {
+      if (result) res.send("City ID: " + req.params.id + " is deleted");
+      else res.send("Data not found");
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 });
 
 app.listen(port, () => {
