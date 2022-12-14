@@ -11,15 +11,28 @@ Below is the diagram of the table that we need to create:
 
 ![ERD_province_city](ERD.png)
 
+## Association
+We are also trying to explore about associations between tables. As depicted in the ERD above, we have a one to many relations between province and city table.
+One province can have many cities, but one city belong to one province.
+
+This is done in models' files with these syntaxes:
+```
+Provinces.hasMany(models.Cities);
+Cities.belongsTo(models.Provinces);
+```
+
 ## API Endpoints
 Here are the list of API endpoint:
 
 This one is for **province** table:
-1) get all provinces' name: app.get(/province)
-2) get a province's detail by its ID: app.get(/province/:id)
-3) create/add one or more province(s): app.post(/province)
-4) update a province's detail: app.put(/province/:id)
-5) delete a province: app.delete(province/:id)
+| API | Objective |
+| — — — | — — — — — -| — — — — — |
+| app.get(/province) | get all provinces' name |
+| app.get(/province/:id) | get a province's detail by its ID |
+| app.post(/province) | create/add one or more province(s) |
+| app.put(/province/:id) | update a province's detail |
+| app.delete(province/:id) | delete a province |
+| app.get(/province/:id/city) | get all the cities that belongs to a specific province |
 
 This one is for **city** table:
 1) get all cities' name: app.get(/city)
