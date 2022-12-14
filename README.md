@@ -6,12 +6,12 @@
 In this project, we are learning and creating a project about CRUD (create, read, update and delete) process.
 Also we are going to make API end point that is related to the CRUD process.
 
-##Entity Relational Diagram 
+## Entity Relational Diagram 
 Below is the diagram of the table that we need to create:
 
 ![ERD_province_city](ERD.png)
 
-##API Endpoints
+## API Endpoints
 Here are the list of API endpoint:
 
 This one is for _province_ table:
