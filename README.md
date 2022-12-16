@@ -21,21 +21,6 @@ Below is some note, regarding the project revision / version.
 | 1.2 | add API for **province's detail** (includes all the cities that **belongs to the province**) |
 | 1.3 | add validation process that check whether the city / province to be inserted are already exists |
 
-## Entity Relational Diagram 
-Below is the diagram of the table that we need to create:
-
-![ERD_province_city](ERD.png)
-
-## Associations
-We are also trying to explore about associations between tables. As depicted in the ERD above, we have a one to many relations between province and city table.
-One province can have many cities, but one city belong to one province.
-
-This is done in models' files with these syntaxes:
-```
-Provinces.hasMany(models.Cities);
-Cities.belongsTo(models.Provinces);
-```
-
 ## API Endpoints
 Here are the list of API endpoint:
 
@@ -56,6 +41,40 @@ Here are the list of API endpoint:
 ## API Simulation
 We are using Postman to simulate the API end point. You can find the Postman JSON file in this repository, called:
 `fwd10_prov_city.postman_collection.json`
+
+## Entity Relational Diagram 
+Below is the diagram of the table that we need to create:
+
+![ERD_province_city](ERD.png)
+
+## Associations
+We are also trying to explore about associations between tables. As depicted in the ERD above, we have a one to many relations between province and city table.
+One province can have many cities, but one city belong to one province.
+
+This is done in models' files with these syntaxes:
+```
+Provinces.hasMany(models.Cities);
+Cities.belongsTo(models.Provinces);
+```
+Also in migration's file, we need to add a foreign key definition
+```
+ProvinceId: {
+  type: Sequelize.INTEGER,
+    references: {
+    model: "Provinces",
+    key: "id",
+    as: "ProvinceId",
+  }
+```
+Finally when doing query we need to include that foreign key in the query
+```
+Cities.findAll({
+  attributes: ["id", "cityName"],
+  include: {
+    model: Provinces,
+    attributes: ["id", "provinceName"],
+}
+```
 
 ## Validation
 In this project the validation process is perfomed to check whether the city / province to be inserted, are already exists or not. From [documentation](https://sequelize.org/docs/v7/core-concepts/validations-and-constraints/), there is: **Validations & Constraints**. Validations are checks performed in the Sequelize level, the code that we put in our JavaScript file. On the other hand, constraints are rules defined at SQL level. 
