@@ -7,7 +7,7 @@ In this project, we are learning and creating a project about **CRUD** (create, 
 Also we are going to make API end point that is related to the CRUD process.
 
 ## Important Note (to our dear mentor Arya Kusuma)
-You can find 2 files: app.js and app-tugas.js. The one that is required to assignment submission is **app-tugas.js** 👍.
+You can find 2 files in this repository: app.js and **app-tugas.js**. The one that is required for assignment submission is **app-tugas.js** 👍.
 While app.js is the one we are using to explore the features of SequelizeJS
 
 ## Revision / Version
