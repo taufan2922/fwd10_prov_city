@@ -54,7 +54,25 @@ We are using Postman to simulate the API end point. You can find the Postman JSO
 `fwd10_prov_city.postman_collection.json`
 
 ## Validation
-In order to 
+In this project the validation process is perfomed to check whether the city / province to be inserted, are already existed or not. From [documentation](https://sequelize.org/docs/v7/core-concepts/validations-and-constraints/), there is: **Validations & Constraints**. Validations are checks performed in the Sequelize level, the code that we put in our JavaScript file. On the other hand, constraints are rules defined at SQL level. 
+
+Example of constraint in our project for provinceName: 
+```
+/* ... */ {
+  provinceName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true
+  },
+  } /* ... */
+```
+This makes **provinceName** unique and no other objects can have same value. However, we have not tried this constraint in **Version 1.3**. Instead we are using validation, which in a nutshell works by comparing the (new) input **provinceName** with existing data in MySQL database.
+```
+Provinces.findOne({ where: { provinceName: req.body.provinceName } })
+```
+So basically we make a query, to find a row/data whose provinceName value equals provinceName from the input request body.
+
+***
 
 That's it! Feel free to [contact me](mailto:taufan2922@gmail.com?subject=[GitHub]%20fwd10_province_city) if you have any questions regarding this repo 😉
 
