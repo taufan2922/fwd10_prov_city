@@ -6,6 +6,17 @@
 In this project, we are learning and creating a project about **CRUD** (create, read, update and delete) process.
 Also we are going to make API end point that is related to the CRUD process.
 
+## Revision / Version
+As we are making progress in learning things, the project is also growing into more complex features.
+Below is some note, regarding the project revision / version.
+
+| Rev./Ver. | Description |
+| --- | --- |
+| 1.0 | make **Create** and **Read API** for provinces and cities |
+| 1.1 | add **Update** and **Delete API** for provinces and cities |
+| 1.2 | add API for **province's detail** (includes all the cities that **belongs to the province**) |
+| 1.3 | add validation process that check whether the city / province to be inserted, are existed or not |
+
 ## Entity Relational Diagram 
 Below is the diagram of the table that we need to create:
 
@@ -41,6 +52,9 @@ Here are the list of API endpoint:
 ## API Simulation
 We are using Postman to simulate the API end point. You can find the Postman JSON file in this repository, called:
 `fwd10_prov_city.postman_collection.json`
+
+## Validation
+In order to 
 
 That's it! Feel free to [contact me](mailto:taufan2922@gmail.com?subject=[GitHub]%20fwd10_province_city) if you have any questions regarding this repo 😉
 
