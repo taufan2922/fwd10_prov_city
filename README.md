@@ -134,7 +134,7 @@ res.send(`Province ${req.body.provinceName} is inserted into database.`);
 res.send(`Province ${req.body.provinceName} is already existed`);
 ```
 
-However applying this solution, required the application of **async function**. So basically, during the iteration you can do each stuffs mentioned above without having to wait for one process to finish before starting another process (synchronize function).
+However applying this solution, requires the application of **async function**. So basically, during the iteration you can do each stuffs mentioned above without having to wait for one process to finish before starting another process (synchronize function).
 ```
 app.post("/city", async function (req, res) {
   await Cities.findOne({ where: { cityName: req.body.cityName } })
