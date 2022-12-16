@@ -48,7 +48,7 @@ Below is the diagram of the table that we need to create:
 ![ERD_province_city](ERD.png)
 
 ## Associations
-We are also trying to explore about associations between tables. As depicted in the ERD above, we have a one to many relations between province and city table.
+We are also trying to explore about association between tables. As depicted in the ERD above, we have a **one to many** relation between province and city table.
 One province can have many cities, but one city belong to one province.
 
 This is done in models' files with these syntaxes:
@@ -74,6 +74,11 @@ Cities.findAll({
     model: Provinces,
     attributes: ["id", "provinceName"],
 }
+```
+The syntax above will create following query sending to database
+```
+Executing (default): SELECT `Cities`.`id`, `Cities`.`cityName`, `Province`.`id` AS `Province.id`, `Province`.`provinceName` AS `Province.provinceName` 
+FROM `Cities` AS `Cities` LEFT OUTER JOIN `Provinces` AS `Province` ON `Cities`.`ProvinceId` = `Province`.`id`;
 ```
 
 ## Validation
