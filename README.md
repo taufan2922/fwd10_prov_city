@@ -19,7 +19,7 @@ Below is some note, regarding the project revision / version.
 | 1.0 | make **Create** and **Read API** for provinces and cities |
 | 1.1 | add **Update** and **Delete API** for provinces and cities |
 | 1.2 | add API for **province's detail** (includes all the cities that **belongs to the province**) |
-| 1.3 | add validation process that check whether the city / province to be inserted, are existed or not |
+| 1.3 | add validation process that check whether the city / province to be inserted are already exists |
 
 ## Entity Relational Diagram 
 Below is the diagram of the table that we need to create:
@@ -58,7 +58,7 @@ We are using Postman to simulate the API end point. You can find the Postman JSO
 `fwd10_prov_city.postman_collection.json`
 
 ## Validation
-In this project the validation process is perfomed to check whether the city / province to be inserted, are already existed or not. From [documentation](https://sequelize.org/docs/v7/core-concepts/validations-and-constraints/), there is: **Validations & Constraints**. Validations are checks performed in the Sequelize level, the code that we put in our JavaScript file. On the other hand, constraints are rules defined at SQL level. 
+In this project the validation process is perfomed to check whether the city / province to be inserted, are already exists or not. From [documentation](https://sequelize.org/docs/v7/core-concepts/validations-and-constraints/), there is: **Validations & Constraints**. Validations are checks performed in the Sequelize level, the code that we put in our JavaScript file. On the other hand, constraints are rules defined at SQL level. 
 
 Example of constraint in our project for provinceName: 
 ```
@@ -75,6 +75,54 @@ This makes **provinceName** unique and no other objects can have same value. How
 Provinces.findOne({ where: { provinceName: req.body.provinceName } })
 ```
 So basically we make a query, to find a row/data whose provinceName value equals provinceName from the input request body.
+
+## Bulk creation - the rise of async function
+For Create process, we want to accomodate bulk creation of data. In the Postman, this is done by feeding multiple (array of) object, instead of just one.
+```
+[
+	{"provinceName": "DKI Jakarta"},
+	{"provinceName": "Jawa Barat"},
+	{"provinceName": "Jawa Tengah"},
+	{"provinceName": "Jawa Timur"},
+	{"provinceName": "DI Yogyakarta"},
+	{"provinceName": "Banten"}
+]
+```
+So far, we have tried 2 solutions: models **bulkCreate** and for loop (iteration).
+The first solution is easily done by using following syntax:
+```
+Provinces.bulkCreate(req.body)
+```
+However, when using this solution -- we have not found any way of validation to check whether the city / province to be inserted, are already exists or not.
+Hence we move to the other solution, which is for loop (iteration). Basically we are doing iteration as much as the number of input objects from Postman. In each iteration the followings are done:
+1. Check if data already exists 
+```
+Provinces.findOne({ where: { provinceName: req.body.provinceName } })
+```
+2. Create (insert) data
+```
+Provinces.create(req.body)
+```
+3. Print the result either data is inserted or not
+```
+res.send(`Province ${req.body.provinceName} is inserted into database.`);
+res.send(`Province ${req.body.provinceName} is already existed`);
+```
+
+However applying this solution, required the application of **async function**. So basically, during the iteration you can do each stuffs mentioned above without having to wait for one process to finish before starting another process (synchronize function).
+```
+async function (result) {
+  if (result === null) {
+    await Provinces.create(req.body[index])
+     .then((result) => {
+       res.send(`Province ${req.body.provinceName} is inserted into database.`);
+     })
+     .catch((err) => {
+       res.send(err);
+     });
+  } else res.send(`Province ${req.body.provinceName} is already existed`);
+}
+```
 
 ***
 
