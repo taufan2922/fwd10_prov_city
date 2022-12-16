@@ -75,10 +75,11 @@ Cities.findAll({
     attributes: ["id", "provinceName"],
 }
 ```
-The syntax above will create following query sending to database
+The syntax above will create the following query sent to MySQL database
 ```
-Executing (default): SELECT `Cities`.`id`, `Cities`.`cityName`, `Province`.`id` AS `Province.id`, `Province`.`provinceName` AS `Province.provinceName` 
-FROM `Cities` AS `Cities` LEFT OUTER JOIN `Provinces` AS `Province` ON `Cities`.`ProvinceId` = `Province`.`id`;
+Executing (default): SELECT `Cities`.`id`, `Cities`.`cityName`, `Province`.`id` AS `Province.id`, 
+`Province`.`provinceName` AS `Province.provinceName` FROM `Cities` AS `Cities` 
+LEFT OUTER JOIN `Provinces` AS `Province` ON `Cities`.`ProvinceId` = `Province`.`id`;
 ```
 
 ## Validation
